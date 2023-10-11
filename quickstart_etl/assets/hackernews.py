@@ -20,10 +20,23 @@ def hackernews_topstory_ids() -> List[int]:
     top_500_newstories = requests.get(newstories_url).json()
     return top_500_newstories
 
+@asset(auto_materialize_policy=AutoMaterializePolicy.eager(),
+        group_name="hackernews", compute_kind="HackerNews API")
+def hackernews_random_story_id() -> int:
+    """Get a random story id from the HackerNews topstories endpoint.
+
+    API Docs:
+
+    -
+    """
+    newstories_url = "https://hacker-news.firebaseio.com/v0/topstories.json"
+    top_500_newstories = requests.get(newstories_url).json()
+    return top_500_newstories[0]
+
 
 @asset(auto_materialize_policy=AutoMaterializePolicy.eager(), group_name="hackernews", compute_kind="HackerNews API")
 def hackernews_topstories(
-    context: AssetExecutionContext, hackernews_topstory_ids: List[int]
+    context: AssetExecutionContext, hackernews_topstory_ids: List[int], hackernews_random_story_id: int
 ) -> pd.DataFrame:
     """Get items based on story ids from the HackerNews items endpoint. It may take 1-2 minutes to fetch all 500 items.
 
@@ -42,6 +55,7 @@ def hackernews_topstories(
     df['new_col_B'] = 'B'
     df['new_col_C'] = 'C'
     df['new_col_D'] = 'D'
+    df['random_story_id'] = hackernews_random_story_id
 
     # Dagster supports attaching arbitrary metadata to asset materializations. This metadata will be
     # shown in the run logs and also be displayed on the "Activity" tab of the "Asset Details" page in the UI.
