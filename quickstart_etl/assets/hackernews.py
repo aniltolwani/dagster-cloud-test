@@ -31,7 +31,7 @@ def hackernews_random_story_id() -> int:
     """
     newstories_url = "https://hacker-news.firebaseio.com/v0/topstories.json"
     top_500_newstories = requests.get(newstories_url).json()
-    return top_500_newstories[0]
+    return top_500_newstories[5]
 
 
 @asset(auto_materialize_policy=AutoMaterializePolicy.eager(), group_name="hackernews", compute_kind="HackerNews API")
