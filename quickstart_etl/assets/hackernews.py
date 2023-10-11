@@ -101,3 +101,4 @@ def hackernews_topstories_word_cloud(
     context.add_output_metadata({"plot": MetadataValue.md(md_content)})
 
     return image_data
+
