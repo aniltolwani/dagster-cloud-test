@@ -38,6 +38,7 @@ def hackernews_topstories(
     df = pd.DataFrame(results)
     ## add one more column
     df['new_col'] = 'A'
+    df['new_col_B'] = 'B'
 
     # Dagster supports attaching arbitrary metadata to asset materializations. This metadata will be
     # shown in the run logs and also be displayed on the "Activity" tab of the "Asset Details" page in the UI.
