@@ -50,13 +50,20 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Get branch deployment
+        id: get-branch-deployment
+        if: github.event.action == 'opened' || github.event.action == 'reopened'
+        uses: dagster-io/dagster-cloud-action/actions/utils/get_branch_deployment@v0.1
+        with:
+          organization_id: anil
+
       - name: Launch run
         uses: dagster-io/dagster-cloud-action/actions/utils/run@v0.1
         with:
           organization_id: anil
           location_name: dagster-cloud-test
           # use the cloud deployment
-          deployment: ${{ steps.parse-workspace.outputs.deployment }}
+          deployment: ${{ steps.get-branch-deployment.outputs.deployment }}
           job_name: all_assets_job
           config_json: '{}'
             
