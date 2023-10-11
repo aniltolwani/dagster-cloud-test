@@ -36,3 +36,4 @@ def make_github_prs_updated_sensor(job) -> SensorDefinition:
         context.update_cursor(json.dumps({"pull_requests": pr_event_records[0].storage_id}))
 
     return github_prs_updated_sensor
+# test 
