@@ -55,8 +55,9 @@ jobs:
         with:
           organization_id: anil
           location_name: dagster-cloud-test
-          deployment: ${{ github.ref }}
-          job_name: 'all_assets_job'
+          # use the cloud deployment
+          deployment: ${{ steps.parse-workspace.outputs.deployment }}
+          job_name: all_assets_job
           config_json: '{}'
             
   dagster_cloud_docker_deploy:
