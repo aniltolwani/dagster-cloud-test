@@ -59,7 +59,8 @@ jobs:
           deployment: ${{ steps.parse-workspace.outputs.deployment }}
           job_name: all_assets_job
           config_json: '{}'
-            
+
+
   dagster_cloud_docker_deploy:
     name: Docker Deploy
     runs-on: ubuntu-20.04
@@ -85,3 +86,4 @@ jobs:
           organization_id: ${{ secrets.ORGANIZATION_ID }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DAGSTER_CLOUD_BRANCH_DEPLOYMENT: 'true'  # Enable branch deployments
