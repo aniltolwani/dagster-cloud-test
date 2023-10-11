@@ -19,3 +19,4 @@ defs = Definitions(
     assets=load_assets_from_package_module(assets),
     sensors=[github_prs_updated_sensor],
 )
+# hey lol
