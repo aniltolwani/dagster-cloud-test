@@ -56,7 +56,7 @@ jobs:
           organization_id: anil
           location_name: dagster-cloud-test
           # use the cloud deployment
-          deployment: ${{ steps.parse-workspace.outputs.deployment }}
+          deployment: ${{ env.DAGSTER_CLOUD_DEPLOYMENT_NAME }}
           job_name: all_assets_job
           config_json: '{}'
 
@@ -86,4 +86,3 @@ jobs:
           organization_id: ${{ secrets.ORGANIZATION_ID }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DAGSTER_CLOUD_BRANCH_DEPLOYMENT: 'true'  # Enable branch deployments
