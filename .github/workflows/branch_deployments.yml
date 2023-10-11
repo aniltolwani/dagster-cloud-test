@@ -13,7 +13,7 @@ env:
   ENABLE_FAST_DEPLOYS: 'true'
   PYTHON_VERSION: '3.8'
   DAGSTER_CLOUD_FILE: 'dagster_cloud.yaml'
-
+  REPO_NAME: ${{ github.repository }}
 jobs:
   dagster_cloud_default_deploy:
     name: Dagster Serverless Deploy
