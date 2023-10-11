@@ -53,9 +53,9 @@ jobs:
       - name: Launch run
         uses: dagster-io/dagster-cloud-action/actions/utils/run@v0.1
         with:
-          organization_id: ${{ secrets.ORGANIZATION_ID }}
-          location_name: ${{ env.REPO_NAME }}
-          deployment: ${{ steps.get-branch-deployment.outputs.deployment }}
+          organization_id: anil
+          location_name: dagster-cloud-test
+          deployment: ${{ github.ref }}
           job_name: 'all_assets_job'
           config_json: '{}'
             
