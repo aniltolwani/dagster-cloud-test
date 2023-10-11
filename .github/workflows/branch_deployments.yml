@@ -56,10 +56,11 @@ jobs:
           organization_id: anil
           location_name: dagster-cloud-test
           # use the cloud deployment
-          deployment: ${{ steps.parse-workspace.outputs.deployment }}
+          deployment: branch-6
           job_name: all_assets_job
           config_json: '{}'
-            
+
+
   dagster_cloud_docker_deploy:
     name: Docker Deploy
     runs-on: ubuntu-20.04
@@ -85,11 +86,3 @@ jobs:
           organization_id: ${{ secrets.ORGANIZATION_ID }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Launch run
-        uses: dagster-io/dagster-cloud-action/actions/utils/run@v0.1
-        with:
-          organization_id: ${{ secrets.ORGANIZATION_ID }}
-          location_name: ${{ env.REPO_NAME }}
-          deployment: ${{ steps.get-branch-deployment.outputs.deployment }}
-          job_name: 'all_assets_job'
-          config_json: '{}'
