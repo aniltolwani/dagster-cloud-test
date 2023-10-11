@@ -5,11 +5,12 @@ from typing import List
 import matplotlib.pyplot as plt
 import pandas as pd
 import requests
-from dagster import AssetExecutionContext, MetadataValue, asset
+from dagster import AssetExecutionContext, MetadataValue, asset, AutoMaterializePolicy
 from wordcloud import STOPWORDS, WordCloud
 
 
-@asset(group_name="hackernews", compute_kind="HackerNews API")
+@asset(auto_materialize_policy=AutoMaterializePolicy.eager(),
+        group_name="hackernews", compute_kind="HackerNews API")
 def hackernews_topstory_ids() -> List[int]:
     """Get up to 500 top stories from the HackerNews topstories endpoint.
 
@@ -20,7 +21,7 @@ def hackernews_topstory_ids() -> List[int]:
     return top_500_newstories
 
 
-@asset(group_name="hackernews", compute_kind="HackerNews API")
+@asset(auto_materialize_policy=AutoMaterializePolicy.eager(), group_name="hackernews", compute_kind="HackerNews API")
 def hackernews_topstories(
     context: AssetExecutionContext, hackernews_topstory_ids: List[int]
 ) -> pd.DataFrame:
@@ -38,6 +39,8 @@ def hackernews_topstories(
     df = pd.DataFrame(results)
     ## add one more column
     df['new_col'] = 'A'
+    df['new_col_B'] = 'B'
+    df['new_col_C'] = 'C'
 
     # Dagster supports attaching arbitrary metadata to asset materializations. This metadata will be
     # shown in the run logs and also be displayed on the "Activity" tab of the "Asset Details" page in the UI.
@@ -52,7 +55,7 @@ def hackernews_topstories(
     return df
 
 
-@asset(group_name="hackernews", compute_kind="Plot")
+@asset(auto_materialize_policy=AutoMaterializePolicy.eager(), group_name="hackernews", compute_kind="Plot")
 def hackernews_topstories_word_cloud(
     context: AssetExecutionContext, hackernews_topstories: pd.DataFrame
 ) -> bytes:
