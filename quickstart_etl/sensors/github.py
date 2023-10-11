@@ -20,7 +20,7 @@ def make_github_prs_updated_sensor(job) -> SensorDefinition:
         pr_event_records = context.instance.get_event_records(
             EventRecordsFilter(
                 event_type=DagsterEventType.ASSET_MATERIALIZATION,
-                Asset_key=AssetKey(["github", "core", "pull_requests", os.getenv['REPO_NAME']]),
+                Asset_key=AssetKey(["github", "core", "pull_requests", os.getenv('REPO_NAME')]),
                 after_cursor=cursor,
             ),
             ascending=False,
