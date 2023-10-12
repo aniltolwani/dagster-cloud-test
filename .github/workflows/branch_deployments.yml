@@ -61,7 +61,15 @@ jobs:
         id: print-branch-deployment
         run: |
           echo "Branch deployment: ${{ steps.get-branch-deployment.outputs.deployment }}"
+          if [ -z "${{ steps.get-branch-deployment.outputs.deployment }}" ]
+          then
+            echo "Branch deployment is blank"
+          fi
           echo "Prod deployment: ${{ steps.parse-workspace.outputs.deployment }}"
+          if [ -z "${{ steps.parse-workspace.outputs.deployment }}" ]
+          then
+            echo "Prod deployment is blank"
+          fi
 
         
       - name: Launch run
