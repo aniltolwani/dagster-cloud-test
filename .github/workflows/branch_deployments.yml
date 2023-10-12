@@ -80,7 +80,7 @@ jobs:
           organization_id: anil
           location_name: dagster-cloud-test
           # use the cloud deployment
-          deployment: 
+          deployment: 20821542a7abdfbaa0c2213bfe552c8b9fff4ee8
           job_name: all_assets_job
           config_json: '{}'
             
