@@ -55,6 +55,8 @@ def hackernews_topstories(
     df['new_col_B'] = 'B'
     df['new_col_C'] = 'C'
     df['new_col_D'] = 'D'
+    df['new_col_E'] = 'E'
+
     df['random_story_id'] = hackernews_random_story_id
 
     # Dagster supports attaching arbitrary metadata to asset materializations. This metadata will be

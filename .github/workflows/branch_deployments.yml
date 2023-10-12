@@ -56,6 +56,7 @@ jobs:
         uses: dagster-io/dagster-cloud-action/actions/utils/get_branch_deployment@v0.1
         with:
           organization_id: anil
+          source_directory: '.'
 
       - name: Launch run
         uses: dagster-io/dagster-cloud-action/actions/utils/run@v0.1
