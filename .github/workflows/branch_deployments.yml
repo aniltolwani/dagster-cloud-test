@@ -72,7 +72,7 @@ jobs:
           fi
           echo "env variable: ${{ env.DAGSTER_CLOUD_DEPLOYMENT }}"
           echo "github ref: ${{ github.ref }}"
-
+# test
         
       - name: Launch run
         uses: dagster-io/dagster-cloud-action/actions/utils/run@v0.1
