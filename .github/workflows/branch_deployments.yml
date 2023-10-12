@@ -61,6 +61,7 @@ jobs:
         id: print-branch-deployment
         run: |
           echo "Branch deployment: ${{ steps.get-branch-deployment.outputs.deployment }}"
+          echo "Prod deployment: ${{ steps.parse-workspace.outputs.deployment }}"
 
         
       - name: Launch run
