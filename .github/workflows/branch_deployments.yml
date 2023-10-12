@@ -52,25 +52,9 @@ jobs:
 
       - name: Get branch deployment
         id: get-branch-deployment
-        if: github.event.action == 'opened' || github.event.action == 'reopened'
         uses: dagster-io/dagster-cloud-action/actions/utils/get_branch_deployment@v0.1
         with:
           organization_id: anil
-
-      - name: Print branch deployment output
-        id: print-branch-deployment
-        run: |
-          echo "Branch deployment: ${{ steps.get-branch-deployment.outputs.deployment }}"
-          if [ -z "${{ steps.get-branch-deployment.outputs.deployment }}" ]
-          then
-            echo "Branch deployment is blank"
-          fi
-          echo "Prod deployment: ${{ steps.parse-workspace.outputs.deployment }}"
-          if [ -z "${{ steps.parse-workspace.outputs.deployment }}" ]
-          then
-            echo "Prod deployment is blank"
-          fi
-
         
       - name: Launch run
         uses: dagster-io/dagster-cloud-action/actions/utils/run@v0.1
@@ -78,7 +62,7 @@ jobs:
           organization_id: anil
           location_name: dagster-cloud-test
           # use the cloud deployment
-          deployment: prod
+          deployment: ${{ steps.get-branch-deployment.outputs.deployment }}
           job_name: all_assets_job
           config_json: '{}'
             
