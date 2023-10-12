@@ -54,7 +54,7 @@ jobs:
         uses: dagster-io/dagster-cloud-action/actions/utils/get_branch_deployment@v0.1
         with:
           organization_id: anil
-          source_directory: '.'
+          source_directory: ${{ github.workspace }}
 
       # for testing
       - name: Print branch deployment output
