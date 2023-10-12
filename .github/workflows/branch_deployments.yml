@@ -58,8 +58,8 @@ jobs:
           organization_id: anil
 
       - name: Print branch deployment output
-        run: echo "Branch Deployment Output: ${{ steps.get-branch-deployment.outputs.deployment }}"      
-
+        run: echo "Branch deployment: ${{ steps.get-branch-deployment.outputs.deployment }}"
+        
       - name: Launch run
         uses: dagster-io/dagster-cloud-action/actions/utils/run@v0.1
         with:
