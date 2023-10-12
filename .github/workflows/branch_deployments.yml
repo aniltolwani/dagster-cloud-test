@@ -71,6 +71,7 @@ jobs:
             echo "Prod deployment is blank"
           fi
           echo "env variable: ${{ env.DAGSTER_CLOUD_DEPLOYMENT }}"
+          echo "github ref: ${{ github.ref }}"
 
         
       - name: Launch run
