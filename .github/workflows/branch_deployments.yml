@@ -54,26 +54,9 @@ jobs:
         uses: dagster-io/dagster-cloud-action/actions/utils/get_branch_deployment@v0.1
         with:
           organization_id: anil
-          source_directory: dagster-cloud-test
+          source_directory: "$GITHUB_WORKSPACE/project-repo"
 
-      # for testing
-      - name: Print branch deployment output
-        id: print-branch-deployment
-        run: |
-          echo "Branch deployment: ${{ steps.get-branch-deployment.outputs.deployment }}"
-          if [ -z "${{ steps.get-branch-deployment.outputs.deployment }}" ]
-          then
-            echo "Branch deployment is blank"
-          fi
-          echo "Prod deployment: ${{ steps.parse-workspace.outputs.deployment }}"
-          if [ -z "${{ steps.parse-workspace.outputs.deployment }}" ]
-          then
-            echo "Prod deployment is blank"
-          fi
-          echo "env variable: ${{ env.DAGSTER_CLOUD_DEPLOYMENT }}"
-          echo "github ref: ${{ github.ref }}"
-# test
-        
+          
       - name: Launch run
         uses: dagster-io/dagster-cloud-action/actions/utils/run@v0.1
         with:
