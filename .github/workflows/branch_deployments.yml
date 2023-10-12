@@ -55,8 +55,7 @@ jobs:
         with:
           organization_id: anil
           # github workspace / project repo
-          source_directory: ${{GITHUB_WORKSPACE/project-repo}}
-
+          source_directory: "dagster-cloud-test"
           
       - name: Launch run
         uses: dagster-io/dagster-cloud-action/actions/utils/run@v0.1
