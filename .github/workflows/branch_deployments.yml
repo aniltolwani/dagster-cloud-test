@@ -10,7 +10,7 @@ concurrency:
 env:
   DAGSTER_CLOUD_URL: "http://anil.dagster.cloud"
   DAGSTER_CLOUD_API_TOKEN: ${{ secrets.DAGSTER_CLOUD_API_TOKEN }}
-  ENABLE_FAST_DEPLOYS: 'false'
+  ENABLE_FAST_DEPLOYS: 'true'
   PYTHON_VERSION: '3.8'
   DAGSTER_CLOUD_FILE: 'dagster_cloud.yaml'
   REPO_NAME: ${{ github.repository }}
@@ -34,7 +34,6 @@ jobs:
           dagster_cloud_file: $DAGSTER_CLOUD_FILE
 
       - name: Checkout for Python Executable Deploy
-        if: steps.prerun.outputs.result == 'pex-deploy'
         uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
@@ -52,7 +51,6 @@ jobs:
 
       - name: Get branch deployment
         id: get-branch-deployment
-        if: github.event.action == 'opened' || github.event.action == 'reopened'
         uses: dagster-io/dagster-cloud-action/actions/utils/get_branch_deployment@v0.1
         with:
           organization_id: anil
